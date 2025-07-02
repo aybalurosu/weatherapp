@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import MainInfo from "./components/MainInfo";
 import Footer from "./components/Footer";
 import ModalSearch from "./components/Modals/ModalChilds/ModalSearch";
+import ModalMap from "./components/Modals/ModalChilds/ModalMaps";
 
 
 export default function Home() {
@@ -14,7 +15,11 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenMenu = () => setIsOpen(open => !open);
   const [open, setOpen] = useState(false);
+  const [openMap, setOpenMap] = useState(false);
+
   const handleOpen = () => setOpen(true);
+  const handleOpenMap = () => setOpenMap(true);
+
   const handleClose = () => setOpen(false);
   const divRef = useRef(null);
 
@@ -49,8 +54,9 @@ export default function Home() {
 
         {/* open modal */}
         <ModalSearch open={open} onClose={handleClose}></ModalSearch>
+        <ModalMap openMap={openMap} onClose={handleClose}></ModalMap>
       </div>
-      <Footer></Footer>
+      <Footer isOpen={handleOpenMap} handleOpen={handleOpen}></Footer>
     </div>
   );
 }
