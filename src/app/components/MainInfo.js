@@ -1,12 +1,12 @@
-import Alert from "./Alert";
-import Forecast from "./Forecast";
-import UVIndex from "./UVIndex";
-import WheaterTime from "./WheaterTime";
-import Humidity from "./Humidity";
-import Sensation from "./Sensation";
-import Wind from "./Wind";
-import Sunset from "./Sunset";
-import Polen from "./Polen";
+import Alert from "./WeatherItems/Alert";
+import Forecast from "./WeatherItems/Forecast";
+import UVIndex from "./WeatherItems/UVIndex";
+import WheaterTime from "./WeatherItems/WheaterTime";
+import Humidity from "./WeatherItems/Humidity";
+import Sensation from "./WeatherItems/Sensation";
+import Wind from "./WeatherItems/Wind";
+import Sunset from "./WeatherItems/Sunset";
+import Polen from "./WeatherItems/Polen";
 
 import React from "react";
 

@@ -6,8 +6,6 @@ export default function WheaterTime() {
       <div className="flex flex-col gap-3.5">
         <div className="flex flex-row justify-between">
           <button className="text-blue-200 font-medium">Today</button>
-          <button className="text-blue-200 font-medium">Tomorrow</button>
-          <button className="text-blue-200 font-medium">Next 7 days</button>
         </div>
         <div className="flex flex-row gap-6">
           <div className="text-white font-medium">Now</div>
@@ -17,8 +15,6 @@ export default function WheaterTime() {
           <div className="text-white font-medium">18</div>
           <div className="text-white font-medium">19</div>
           <div className="text-white font-medium">20</div>
-          <div className="text-white font-medium">21</div>
-          <div className="text-white font-medium">22</div>
         </div>
       </div>
     </div>

@@ -6,11 +6,16 @@ import Menu from "./components/Menu";
 import { useState, useRef, useEffect } from "react";
 import MainInfo from "./components/MainInfo";
 import Footer from "./components/Footer";
+import ModalSearch from "./components/Modals/ModalChilds/ModalSearch";
 
 
 export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false);
+  const isOpenMenu = () => setIsOpen(open => !open);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -34,13 +39,16 @@ export default function Home() {
     }
   }, [isOpen]);
 
+
   return (
     <div className="weather">
-      <div className="p-4">
-        <Navbar isOpen={() => setIsOpen(open => !open)}></Navbar>
+      <div className="pt-4 pr-4 pl-4 pb-1">
+        <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
         {isOpen && <Menu isOpen={() => setIsOpen(open => !open)}/>}
-
         <MainInfo ref={divRef}></MainInfo>
+
+        {/* open modal */}
+        <ModalSearch open={open} onClose={handleClose}></ModalSearch>
       </div>
       <Footer></Footer>
     </div>
