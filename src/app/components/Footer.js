@@ -1,6 +1,7 @@
 import Image from "next/image";
+import bindTrigger from 'material-ui-popup-state';
 
-export default function Footer({handleOpen}) {
+export default function Footer({handleOpen, openPopover }) {
 
   return (
     <div className="border-2 border-[#5579A4] w-full h-16 bg-[#5579A4] p-4 rounded-tr-4xl rounded-tl-4xl
@@ -13,7 +14,7 @@ export default function Footer({handleOpen}) {
         <div className="rounded-full bg-white w-1.5 h-1.5"></div>
         <div className="rounded-full bg-white w-1.5 h-1.5"></div>
       </div>
-      <Image src={'/footer/settings.svg'} width={23} height={23} alt=""></Image>
+      <button variant="contained" onClick={(e) => openPopover(e.currentTarget)}><Image src={'/footer/settings.svg'} width={23} height={23} alt=""></Image></button>
     </div>
   );
 }

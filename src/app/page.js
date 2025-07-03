@@ -8,6 +8,7 @@ import MainInfo from "./components/MainInfo";
 import Footer from "./components/Footer";
 import ModalSearch from "./components/Modals/ModalChilds/ModalSearch";
 import ModalMap from "./components/Modals/ModalChilds/ModalMaps";
+import PopoverSettings from "./components/Popover/PopoverSettings";
 
 
 export default function Home() {
@@ -47,6 +48,16 @@ export default function Home() {
     }
   }, [isOpen]);
 
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleOpenPopover = (element) => {
+      setAnchorEl(element);
+    };
+
+    const handleClosePopover = () => {
+      setAnchorEl(null);
+    };
+
 
   return (
     <div className="weather">
@@ -59,7 +70,9 @@ export default function Home() {
         <ModalSearch open={open} onClose={handleClose}></ModalSearch>
         <ModalMap open={openMaps} onClose={handleCloseMaps}></ModalMap>
       </div>
-      <Footer handleOpen={handleOpenMaps}></Footer>
+      <Footer handleOpen={handleOpenMaps} openPopover={handleOpenPopover}></Footer>
+      <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
     </div>
+
   );
 }
