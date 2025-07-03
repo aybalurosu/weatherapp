@@ -8,8 +8,8 @@ export default function ModalSearch ({open, handleClose, onClose}) {
     return (
         <div>
             <ModalParent open={open} onClose={handleClose}>
-                <Box className={`fixed top-1/2 left-1/2 z-50 transform -translate-x-1/2 -translate-y-1/2
-                bg-white p-6 rounded-xl shadow-xl w-96 max-w-full transition-all duration-200 ease-in-out
+                <Box className={`fixed top-24 left-1/2 z-50 transform -translate-x-1/2 
+                bg-white p-6 rounded-xl shadow-xl min-w-[87%] max-w-full transition-all duration-200 ease-in-out
                 ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}
                 `}>
                     <div className='flex flex-row justify-between items-center mb-5'>
@@ -22,7 +22,7 @@ export default function ModalSearch ({open, handleClose, onClose}) {
                     </div>
                     <div className='flex flex-col gap-2'>
                         <h1 className='font-medium text-lg'>Search History</h1>
-                        <div className="inline-flex justify-between text-bs">
+                        <div className="history-search inline-flex justify-between text-bs">
                             <p>Bulgaria</p> 
                             <Image src={'/modals/history.svg'} width={23} height={23} alt=''></Image>
                         </div>

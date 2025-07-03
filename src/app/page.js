@@ -14,13 +14,16 @@ export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false);
   const isOpenMenu = () => setIsOpen(open => !open);
+
   const [open, setOpen] = useState(false);
-  const [openMap, setOpenMap] = useState(false);
-
   const handleOpen = () => setOpen(true);
-  const handleOpenMap = () => setOpenMap(true);
-
   const handleClose = () => setOpen(false);
+
+
+  const [openMaps, setOpenMaps] = useState(false)
+  const handleOpenMaps = () => setOpenMaps(true);
+  const handleCloseMaps = () => setOpenMaps(false);
+
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -54,9 +57,9 @@ export default function Home() {
 
         {/* open modal */}
         <ModalSearch open={open} onClose={handleClose}></ModalSearch>
-        <ModalMap openMap={openMap} onClose={handleClose}></ModalMap>
+        <ModalMap open={openMaps} onClose={handleCloseMaps}></ModalMap>
       </div>
-      <Footer isOpen={handleOpenMap} handleOpen={handleOpen}></Footer>
+      <Footer handleOpen={handleOpenMaps}></Footer>
     </div>
   );
 }

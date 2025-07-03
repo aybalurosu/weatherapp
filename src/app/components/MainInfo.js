@@ -6,7 +6,6 @@ import Humidity from "./WeatherItems/Humidity";
 import Sensation from "./WeatherItems/Sensation";
 import Wind from "./WeatherItems/Wind";
 import Sunset from "./WeatherItems/Sunset";
-import Polen from "./WeatherItems/Polen";
 
 import React from "react";
 
@@ -25,12 +24,11 @@ const MainInfo = React.forwardRef((props, ref) => {
         <Forecast />
         <div>
           <h1 className="text-xl pl-3 text-white font-medium">Weather Details</h1>
-          <div className="p-3 flex flex-row flex-wrap gap-4">
+          <div className="p-3 flex flex-row flex-wrap gap-3">
             <UVIndex />
             <Sunset />
             <Humidity />
             <Sensation />
-            <Polen />
             <Wind />
           </div>
         </div>

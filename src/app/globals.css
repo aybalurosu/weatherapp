@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .weather {
-  background-image: url(/home/sunny.jpeg);
+  background-image: url(/home/night.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
 }
