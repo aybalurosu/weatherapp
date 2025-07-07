@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 .weather {
-  background-image: url(/home/night.jpeg);
+  background-image: url(/home/sunny.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .anim-slide-content {
   transform: translateX(310px);
-  transition: transform 0.25s ease-out;
+  transition: transform 0.25s linear;
 }
 
 .remove-anim-slide-content {
   transform: translateX(0px);
-  transition: transform 0.25s ease-out;
+  transition: transform 0.25s linear;
 }
