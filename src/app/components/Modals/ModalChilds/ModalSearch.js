@@ -1,9 +1,32 @@
 import * as React from 'react';
 import { ModalParent } from '../ModalParent';
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import Image from 'next/image';
 
-export default function ModalSearch ({open, handleClose, onClose}) {
+import SearchCity from '@/app/lib/SearchCity';
+
+export default function ModalSearch({ open, handleClose, onClose }) {
+
+    const [city, setCity] = React.useState('');
+    const [data, setData] = React.useState(null);
+
+
+    React.useEffect(() => {
+        if (!city) return; // Do not search empty
+
+        const delayDebounce = setTimeout(async () => {
+            // try {
+                const data = await SearchCity(city);
+                console.log(data);
+                // setData(data);
+            // } catch (error) {
+            //     console.error(error);
+            // }
+        }, 500); // wait 500ms after user stops typing
+
+        // Cleanup timeout if user types again before 500ms
+        return () => clearTimeout(delayDebounce);
+    }, [city]);
 
     return (
         <div>
@@ -18,12 +41,13 @@ export default function ModalSearch ({open, handleClose, onClose}) {
                     </div>
                     <div className="bg-[#c4c5cfbd] p-3 rounded-3xl inline-flex gap-3 w-full mb-5">
                         <Image src={'/modals/search.svg'} width={18} height={18} alt=''></Image>
-                        <input className="outline-0 text-[#505158]" placeholder="Search..."></input>
+                        <input className="outline-0 text-[#505158]"
+                            placeholder="Search..." value={city} onChange={(e) => setCity(e.target.value)} />
                     </div>
                     <div className='flex flex-col gap-2'>
                         <h1 className='font-medium text-lg'>Search History</h1>
                         <div className="history-search inline-flex justify-between text-bs">
-                            <p>Bulgaria</p> 
+                            <p>{city}</p>
                             <Image src={'/modals/history.svg'} width={23} height={23} alt=''></Image>
                         </div>
                     </div>
