@@ -20,19 +20,15 @@ export default function PopoverSettings({ anchorEl, onClose }) {
                 },
             }}>
             <div className='flex flex-col items-start'>
-                {/* celsius & farenheit */}
                 <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
-                    <button className="font-semibold text-[#b5ced2]">Temperature Units</button>
+                    <button className="font-semibold text-[#b5ced2]">Celsius º</button>
+                </div> 
+                <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
+                    <button className="font-semibold text-[#b5ced2]">Farenheit F</button>
                 </div> 
                 {/* dark, light or system theme */}
                 <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
                     <button className="font-semibold text-[#b5ced2]">Theme</button>
-                </div>
-                <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
-                    <button className="font-semibold text-[#b5ced2]">Notifications</button>
-                </div>
-                <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
-                    <button className="font-semibold text-[#b5ced2]">Help</button>
                 </div>
             </div>
         </Popover>
