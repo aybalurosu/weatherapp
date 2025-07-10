@@ -2,9 +2,7 @@ import Forecast from "./WeatherItems/Forecast";
 import UVIndex from "./WeatherItems/UVIndex";
 import WheaterTime from "./WeatherItems/WheaterTime";
 import Humidity from "./WeatherItems/Humidity";
-import Sensation from "./WeatherItems/Sensation";
 import Wind from "./WeatherItems/Wind";
-import Sunset from "./WeatherItems/Sunset";
 
 import React from "react";
 
