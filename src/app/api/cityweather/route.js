@@ -1,5 +1,6 @@
+import { CityInformation, POST } from "../search/route";
 
-export async function POST (request) {
+export async function GET (request) {
 
     const url = new URL(request.url);
     const city = url.searchParams.get('name');
@@ -9,7 +10,7 @@ export async function POST (request) {
     }
 
     try {
-        const geoCoding = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&language=en&format=json`);
+        const geoCoding = await POST(city);
         const geoData = await geoCoding.json();
 
         if (!geoData.results) {
@@ -21,13 +22,12 @@ export async function POST (request) {
             });
         }
 
-        const locations = geoData.results.map((res) => ({
-            name: res.name,
-            country: res.country,
-            region: res.admin1,
+        forecastData = geoData.results.map((res) => ({
+            latitude: res.latitude,
+            longitude: res.longitude,
         }));
 
-        return new Response(JSON.stringify(locations), {
+        return new Response(JSON.stringify(forecastData), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
@@ -37,5 +37,16 @@ export async function POST (request) {
     } catch (error) {
         console.log(error);
     }
-    
 }
+
+// export default async function POST () {
+
+//     try {
+
+//         const forecastData = await GetForecastData();
+//         const data = await forecastData.json();
+
+//     } catch {
+
+//     }
+// }

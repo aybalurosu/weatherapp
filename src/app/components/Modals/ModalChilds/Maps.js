@@ -19,6 +19,5 @@ export default function ModalMap({ open, handleClose, onClose }) {
                 </Box>
             </ModalParent>
         </div>
-        // 8655f0251d455f2c7d4ce9af899b9b81
     )
 } 

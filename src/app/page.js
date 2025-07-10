@@ -6,9 +6,10 @@ import Menu from "./components/Menu";
 import { useState, useRef, useEffect } from "react";
 import MainInfo from "./components/MainInfo";
 import Footer from "./components/Footer";
-import ModalSearch from "./components/Modals/ModalChilds/ModalSearch";
-import ModalMap from "./components/Modals/ModalChilds/ModalMaps";
+import Search from "./components/Modals/ModalChilds/Search";
+import Maps from "./components/Modals/ModalChilds/Maps";
 import PopoverSettings from "./components/Popover/PopoverSettings";
+import CityWeather from "./components/Modals/ModalChilds/CityWeather";
 
 export default function Home() {
 
@@ -19,10 +20,19 @@ export default function Home() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   const [openMaps, setOpenMaps] = useState(false)
   const handleOpenMaps = () => setOpenMaps(true);
   const handleCloseMaps = () => setOpenMaps(false);
+
+  const [openCity, setOpenCity] = useState(false)
+  const handleOpenCity = () => setOpenCity(true);
+  const handleCloseCity = () => setOpenCity(false);
+
+  useEffect(() => {
+    if (openCity) {
+      setOpen(false);
+    }
+  });
 
   const divRef = useRef(null);
 
@@ -47,26 +57,27 @@ export default function Home() {
     }
   }, [isOpen]);
 
-    const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    const handleOpenPopover = (element) => {
-      setAnchorEl(element);
-    };
+  const handleOpenPopover = (element) => {
+    setAnchorEl(element);
+  };
 
-    const handleClosePopover = () => {
-      setAnchorEl(null);
-    };
+  const handleClosePopover = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className="weather">
+    <div className="weather h-full">
       <div className="pt-4 pr-4 pl-4 pb-1">
         <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
         {isOpen && <Menu isOpen={() => setIsOpen(open => !open)}/>}
         <MainInfo ref={divRef}></MainInfo>
 
         {/* open modal */}
-        <ModalSearch open={open} onClose={handleClose}></ModalSearch>
-        <ModalMap open={openMaps} onClose={handleCloseMaps}></ModalMap>
+        <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
+        <Maps open={openMaps} onClose={handleCloseMaps}></Maps>
+        <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
       </div>
       <Footer handleOpen={handleOpenMaps} openPopover={handleOpenPopover}></Footer>
       <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
