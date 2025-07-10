@@ -3,29 +3,33 @@ import { ModalParent } from '../ModalParent';
 import { Box } from '@mui/material';
 import Image from 'next/image';
 
-import SearchCity from '@/app/lib/SearchCity';
 
 export default function ModalSearch({ open, handleClose, onClose }) {
 
     const [city, setCity] = React.useState('');
-    const [data, setData] = React.useState(null);
+    const [results, setResults] = React.useState([]);
 
 
     React.useEffect(() => {
-        if (!city) return; // Do not search empty
+        if (!city) return;
 
-        const delayDebounce = setTimeout(async () => {
-            // try {
-                const data = await SearchCity(city);
-                console.log(data);
-                // setData(data);
-            // } catch (error) {
-            //     console.error(error);
-            // }
-        }, 500); // wait 500ms after user stops typing
+        const delayDebounce = setTimeout(
+            async () => {
+                const data = await fetch(`/api/search?name=${encodeURIComponent(city)}`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
 
-        // Cleanup timeout if user types again before 500ms
+                const res = await data.json();
+                console.log(res);
+                setResults(res)
+
+            }, 600);
+
         return () => clearTimeout(delayDebounce);
+
     }, [city]);
 
     return (
@@ -46,10 +50,12 @@ export default function ModalSearch({ open, handleClose, onClose }) {
                     </div>
                     <div className='flex flex-col gap-2'>
                         <h1 className='font-medium text-lg'>Search History</h1>
-                        <div className="history-search inline-flex justify-between text-bs">
-                            <p>{city}</p>
-                            <Image src={'/modals/history.svg'} width={23} height={23} alt=''></Image>
-                        </div>
+                        {results.map((r, i) => (
+                            <div key={i} className="history-search inline-flex justify-between text-bs">
+                                <button className='hover:bg-[#8EC5FF]'>{r.name}, {r.country}, {r.region}, {r.province}, {r.municipality}</button>
+                                <Image src={'/modals/history.svg'} width={23} height={23} alt=''></Image>
+                            </div>
+                        ))}
                     </div>
                 </Box>
             </ModalParent>

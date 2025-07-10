@@ -1,32 +1,45 @@
+import { get } from "http";
 
-export async function GET (req, res) {
+export async function POST (request) {
 
-    if (req.method != 'GET') {
-        return res.status(405).json({
-            error: 'Only GET allowed'
-        })
-    }
-
-    const city = req.body[0];
-    console.log(city)
+    const url = new URL(request.url);
+    const city = url.searchParams.get('name');
 
     if (!city) {
-        return res.status(404).json({
-            error: 'Required'
-        })
+        return Response.json({ error: 'City is required' }, { status: 400 });
     }
 
     try {
-        const geoCode = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&language=en&format=json`);
-    
-        const geoCodeData = await geoCode.json();
-        console.log(geoCodeData[0]);
-    
-    
+        const geoCoding = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&language=es&format=json`);
+        const geoData = await geoCoding.json();
+
+        if (!geoData.results) {
+            return new Response(JSON.stringify([]), {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
+
+        const locations = geoData.results.map((res) => ({
+            name: res.name,
+            country: res.country,
+            region: res.admin1,
+            province: res.admin2,
+            municipality: res.admin3,
+        }));
+
+
+        return new Response(JSON.stringify(locations), {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: 'Internal Server Error'
-        })
+        console.log(error);
     }
+    
 }

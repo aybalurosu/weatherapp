@@ -1,4 +1,3 @@
-import Alert from "./WeatherItems/Alert";
 import Forecast from "./WeatherItems/Forecast";
 import UVIndex from "./WeatherItems/UVIndex";
 import WheaterTime from "./WeatherItems/WheaterTime";

@@ -10,7 +10,6 @@ import ModalSearch from "./components/Modals/ModalChilds/ModalSearch";
 import ModalMap from "./components/Modals/ModalChilds/ModalMaps";
 import PopoverSettings from "./components/Popover/PopoverSettings";
 
-
 export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +56,6 @@ export default function Home() {
     const handleClosePopover = () => {
       setAnchorEl(null);
     };
-
 
   return (
     <div className="weather">
