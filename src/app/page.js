@@ -10,6 +10,7 @@ import Search from "./components/Modals/ModalChilds/Search";
 import Maps from "./components/Modals/ModalChilds/Maps";
 import PopoverSettings from "./components/Popover/PopoverSettings";
 import CityWeather from "./components/Modals/ModalChilds/CityWeather";
+import { CityContext } from "./components/Modals/ModalChilds/CityContext";
 
 export default function Home() {
 
@@ -67,6 +68,8 @@ export default function Home() {
     setAnchorEl(null);
   };
 
+  const [typedCity, setTypedCity] = useState(null);
+
   return (
     <div className="weather h-full">
       <div className="pt-4 pr-4 pl-4 pb-1">
@@ -75,9 +78,11 @@ export default function Home() {
         <MainInfo ref={divRef}></MainInfo>
 
         {/* open modal */}
-        <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
+        <CityContext.Provider value={{ typedCity, setTypedCity }}>
+          <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
+          <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
+        </CityContext.Provider>
         <Maps open={openMaps} onClose={handleCloseMaps}></Maps>
-        <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
       </div>
       <Footer handleOpen={handleOpenMaps} openPopover={handleOpenPopover}></Footer>
       <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />

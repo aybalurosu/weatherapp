@@ -25,6 +25,8 @@ export async function POST (request) {
             name: res.name,
             country: res.country,
             region: res.admin1,
+            latitude: res.latitude,
+            longitude: res.longitude,
         }));
 
         return new Response(JSON.stringify(locations), {

@@ -3,31 +3,37 @@ import Image from "next/image";
 import { ModalParent } from "../ModalParent";
 import { Box } from '@mui/material';
 import WheaterTime from "../../WeatherItems/WheaterTime";
+import { CityContext } from './CityContext';
 
-export default function CityWeather({ open, handleCloseCity, onClose, addCity, cityValue}) {
+export default function CityWeather({ open, handleCloseCity, onClose, addCity}) {
 
-    const [city, setCity] = React.useState('');
+    const {typedCity} = React.useContext(CityContext);
+    const [currentForecast, setCurrentForecast] = React.useState(null);
 
-    // React.useEffect(() => {
-    //     if (!city) return;
+    React.useEffect(() => {
+        if (!typedCity) return;
 
-    //     const delayDebounce = setTimeout(
-    //         async () => {
-    //             const data = await fetch(`/api/search?name=${encodeURIComponent(cityValue)}`, {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                 }
-    //             });
+        async function fetchData() {
+            try {
 
-    //             const res = await data.json();
-    //             setResults(res.name);
+                const data = await fetch(`/api/forecast?latitude=${encodeURIComponent(typedCity.latitude)}&longitude=${encodeURIComponent(typedCity.longitude)}`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
 
-    //         }, 600);
+                const res = await data.json();
+                setCurrentForecast(res);
 
-    //     return () => clearTimeout(delayDebounce);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    }, [typedCity]);
 
-    // }, [city]);
+    // check max and min temperature
 
     return ( 
         <div>
@@ -41,10 +47,10 @@ export default function CityWeather({ open, handleCloseCity, onClose, addCity, c
                         <button onClick={onClose}><Image src={'/menu/close.svg'} width={20} height={20} alt=''></Image></button>
                     </div>
                     <div className="city-wheater flex flex-col items-center p-7">
-                        <h2 className="text-2xl text-white font-light">{}</h2>
-                        <h1 className="text-7xl text-white font-light">32º</h1>
+                        <h2 className="text-2xl text-white font-light">{typedCity?.name}</h2>
+                        <h1 className="text-7xl text-white font-light">{currentForecast?.temperature} ºC</h1>
                         <p className="text-xl text-white font-light">Soleado</p>
-                        <p className="text-xl text-white font-light">Máx. 33º Mín. 26º</p>
+                        <p className="text-xl text-white font-light">Máx. {}ºC Mín. {}ºC</p>
                     </div>
                     <WheaterTime />
                 </Box>
