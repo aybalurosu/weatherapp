@@ -26,10 +26,6 @@ export default function PopoverSettings({ anchorEl, onClose }) {
                 <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
                     <button className="font-semibold text-[#b5ced2]">Farenheit F</button>
                 </div> 
-                {/* dark, light or system theme */}
-                <div className='p-2 border-3 border-b-[#151d30] border-transparent w-full hover:bg-[#495b7b] transition-all'>
-                    <button className="font-semibold text-[#b5ced2]">Theme</button>
-                </div>
             </div>
         </Popover>
     );

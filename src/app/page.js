@@ -11,6 +11,7 @@ import Maps from "./components/Modals/ModalChilds/Maps";
 import PopoverSettings from "./components/Popover/PopoverSettings";
 import CityWeather from "./components/Modals/ModalChilds/CityWeather";
 import { CityContext } from "./components/Modals/ModalChilds/CityContext";
+import { MenuProvider } from "./components/MenuContext";
 
 export default function Home() {
 
@@ -71,22 +72,23 @@ export default function Home() {
   const [typedCity, setTypedCity] = useState(null);
 
   return (
-    <div className="weather h-full">
-      <div className="pt-4 pr-4 pl-4 pb-1">
-        <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
-        {isOpen && <Menu isOpen={() => setIsOpen(open => !open)}/>}
-        <MainInfo ref={divRef}></MainInfo>
+     <MenuProvider>
+      <div className="weather h-full">
+        <div className="pt-4 pr-4 pl-4 pb-1">
+          <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
+          {isOpen && <Menu isOpen={() => setIsOpen(open => !open)} />}
 
-        {/* open modal */}
-        <CityContext.Provider value={{ typedCity, setTypedCity }}>
-          <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
-          <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
-        </CityContext.Provider>
-        <Maps open={openMaps} onClose={handleCloseMaps}></Maps>
+          {/* open modal */}
+          <CityContext.Provider value={{ typedCity, setTypedCity }}>
+            <MainInfo ref={divRef}></MainInfo>
+            <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
+            <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
+          </CityContext.Provider>
+          <Maps open={openMaps} onClose={handleCloseMaps}></Maps>
+        </div>
+        <Footer handleOpen={handleOpenMaps} openPopover={handleOpenPopover}></Footer>
+        <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
       </div>
-      <Footer handleOpen={handleOpenMaps} openPopover={handleOpenPopover}></Footer>
-      <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
-    </div>
-
+    </MenuProvider>
   );
 }
