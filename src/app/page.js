@@ -7,7 +7,6 @@ import { useState, useRef, useEffect } from "react";
 import MainInfo from "./components/MainInfo";
 import Footer from "./components/Footer";
 import Search from "./components/Modals/ModalChilds/Search";
-import Maps from "./components/Modals/ModalChilds/Maps";
 import PopoverSettings from "./components/Popover/PopoverSettings";
 import CityWeather from "./components/Modals/ModalChilds/CityWeather";
 import { CityContext } from "./components/Modals/ModalChilds/CityContext";
@@ -21,10 +20,6 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [openMaps, setOpenMaps] = useState(false)
-  const handleOpenMaps = () => setOpenMaps(true);
-  const handleCloseMaps = () => setOpenMaps(false);
 
   const [openCity, setOpenCity] = useState(false)
   const handleOpenCity = () => setOpenCity(true);
@@ -72,23 +67,27 @@ export default function Home() {
   const [typedCity, setTypedCity] = useState(null);
 
   return (
-     <MenuProvider>
-      <div className="weather h-full">
-        <div className="pt-4 pr-4 pl-4 pb-1">
+    <div className="weather h-full">
+      <MenuProvider>
+        <header className="p-4"> 
           <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
           {isOpen && <Menu isOpen={() => setIsOpen(open => !open)} />}
-
-          {/* open modal */}
-          <CityContext.Provider value={{ typedCity, setTypedCity }}>
-            <MainInfo ref={divRef}></MainInfo>
-            <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
-            <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
-          </CityContext.Provider>
-          <Maps open={openMaps} onClose={handleCloseMaps}></Maps>
-        </div>
-        <Footer handleOpen={handleOpenMaps} openPopover={handleOpenPopover}></Footer>
-        <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
-      </div>
-    </MenuProvider>
+        </header>
+        <main>
+          <div className="p-4">
+            {/* open modal */}
+            <CityContext.Provider value={{ typedCity, setTypedCity }}>
+              <MainInfo ref={divRef}></MainInfo>
+              <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
+              <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
+            </CityContext.Provider>
+          </div>
+        </main>
+        <footer>
+          <Footer openPopover={handleOpenPopover}></Footer>
+          <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
+        </footer>
+      </MenuProvider>
+    </div>
   );
 }

@@ -1,6 +1,35 @@
 import Image from "next/image";
+import { useContext, useEffect } from "react";
+import { MenuContext } from "../MenuContext";
 
 export default function Forecast() {
+
+  const { latitude } = useContext(MenuContext);
+  const { longitude } = useContext(MenuContext);
+
+ useEffect(() => {
+         if (!latitude && !longitude) return;
+ 
+         async function fetchForecast() {
+             try {
+ 
+                 const data = await fetch(`/api/forecast?latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}`, {
+                     method: 'POST',
+                     headers: {
+                         "Content-Type": "application/json",
+                     },
+                 })
+ 
+                const res = await data.json();
+
+ 
+             } catch (error) {
+                 console.error(error);
+             }
+         }
+         fetchForecast();
+     }, [latitude, longitude]);
+
   return (
     <div className="border-1 border-[#10386900] w-full p-4 rounded-2xl bg-[#10386953]">
       <h1 className="text-blue-300 font-medium pb-1 text-sm">NEXT 7 DAYS</h1>

@@ -10,7 +10,17 @@ export default function CityWeather({ open, handleCloseCity, onClose}) {
     const {typedCity} = React.useContext(CityContext);
     const [currentForecast, setCurrentForecast] = React.useState(null);
     const [minTemperature, setMinTemperature] = React.useState(null);
-    const [maxTemperature, setMaxTemperature] = React.useState(null);    
+    const [maxTemperature, setMaxTemperature] = React.useState(null);
+    const [time, setTime] = React.useState(null);
+    const [temperature, setTemperature] = React.useState(null);
+
+    // weather details
+    const [windSpeed, setWindSpeed] = React.useState(null);
+    const [humidity, setHumidity] = React.useState(null);
+    const [uvIndex, setUvIndex] = React.useState(null);
+
+    const [latitude, setLatitude] = React.useState(null);
+    const [longitude, setLongitude] = React.useState(null);
 
     React.useEffect(() => {
         if (!typedCity) return;
@@ -18,23 +28,30 @@ export default function CityWeather({ open, handleCloseCity, onClose}) {
         async function fetchData() {
             try {
 
-                const data = await fetch(`/api/forecast?latitude=${encodeURIComponent(typedCity.latitude)}&longitude=${encodeURIComponent(typedCity.longitude)}`, {
+                const data = await fetch(`/api/info?latitude=${encodeURIComponent(typedCity.latitude)}&longitude=${encodeURIComponent(typedCity.longitude)}`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
                     },
                 })
 
+                setLatitude(typedCity.latitude);
+                setLongitude(typedCity.longitude);
+
                 const res = await data.json();
                 setCurrentForecast(res.currentWeather);
 
-                let temperatureResults = res.temperature_2m;
-
+                const temperatureResults = res.temperature_2m;
                 const numericArray = temperatureResults.map(Number);
 
                 setMinTemperature(Math.min(...numericArray));
                 setMaxTemperature(Math.max(...numericArray));
-
+                setTemperature(numericArray);
+                setTime(res.time); 
+                
+                setWindSpeed(res.wind);
+                setHumidity(res.humidity);
+                setUvIndex(res.uvindex);
 
             } catch (error) {
                 console.error(error);
@@ -44,6 +61,12 @@ export default function CityWeather({ open, handleCloseCity, onClose}) {
     }, [typedCity]);
 
     const { addCity } = React.useContext(MenuContext);
+    const { weatherTime } = React.useContext(MenuContext);
+    const {windDetail} = React.useContext(MenuContext);
+    const {humidityDetail} = React.useContext(MenuContext);
+    const {uvIndexDetail} = React.useContext(MenuContext);
+
+    const {latitudeAndLongitudeDetails} = React.useContext(MenuContext);
 
     const handleAddCityAndWeather = () => {
         if (!typedCity || !currentForecast) return;
@@ -54,9 +77,20 @@ export default function CityWeather({ open, handleCloseCity, onClose}) {
             minTemp: Number(minTemperature).toFixed(0),
             maxTemp: Number(maxTemperature).toFixed(0),
         };
-        
+
+        const weatherTimeCity = {
+            time: time,
+            temperature: temperature,
+        }
+
         addCity(newCityWeather);
-        handleCloseCity();
+        weatherTime(weatherTimeCity);
+
+        windDetail(windSpeed);
+        humidityDetail(humidity);
+        uvIndexDetail(uvIndex);
+        latitudeAndLongitudeDetails(latitude, longitude);
+        onClose();
     }
 
     return (

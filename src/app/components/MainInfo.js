@@ -5,14 +5,11 @@ import Humidity from "./WeatherItems/Humidity";
 import Wind from "./WeatherItems/Wind";
 
 import React from "react";
-import AirQuality from "./WeatherItems/AirQuality";
 import { MenuContext } from "./MenuContext";
 
 const MainInfo = React.forwardRef((props, ref) => {
 
   const { currentWeatherCity } = React.useContext(MenuContext);
-  const {temperatureExtrems} = React.useContext(MenuContext);
-
   return (
     <div ref={ref}>
       <div className="city-wheater flex flex-col items-center p-7">
@@ -22,12 +19,13 @@ const MainInfo = React.forwardRef((props, ref) => {
       </div>
       <div className="p-3 flex flex-col gap-4">
         <WheaterTime />
-        <Forecast />
-        <div className="p-3 flex flex-row flex-wrap gap-3">
-          <AirQuality />
-          <UVIndex />
-          <Humidity />
-          <Wind />
+        <div className="inline-flex gap-5">
+          <Forecast />
+          <div className="flex flex-col gap-3">
+            <UVIndex />
+            <Humidity />
+            <Wind />
+          </div>
         </div>
       </div>
     </div>

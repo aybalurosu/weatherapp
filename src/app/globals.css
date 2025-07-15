@@ -15,3 +15,12 @@
   transform: translateX(0px);
   transition: transform 0.25s linear;
 }
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-hidden {
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;     /* Firefox */
+}

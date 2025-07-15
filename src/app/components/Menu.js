@@ -5,7 +5,7 @@ import { MenuContext } from "./MenuContext";
 export default function Menu({ isOpen }) {
 
   const { savedCities, setSavedCities } = useContext(MenuContext);
-  const { currentWeatherCity, setCurrentWeatherCity } = useContext(MenuContext);
+  const { setCurrentWeatherCity } = useContext(MenuContext);
 
   const removeSavedCity = (cityToRemove) => {
     setSavedCities(prev => prev.filter(city => city !== cityToRemove));
