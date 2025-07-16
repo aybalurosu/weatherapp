@@ -71,7 +71,7 @@ export default function CityWeather({ open, handleCloseCity, onClose}) {
     const handleAddCityAndWeather = () => {
         if (!typedCity || !currentForecast) return;
 
-         const newCityWeather = {
+        const newCityWeather = {
             name: typedCity.name,
             temperature: Number(currentForecast.currentTemperature).toFixed(0),
             minTemp: Number(minTemperature).toFixed(0),

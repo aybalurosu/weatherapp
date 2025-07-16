@@ -35,12 +35,6 @@ export async function POST (request) {
 
         const currentWeather = {
             currentTemperature: current.temperature_2m,
-            cloud_cover: current.cloud_cover,
-            rain: current.rain,
-            precipitation: current.precipitation,
-            showers: current.showers,
-            snowfall: current.snowfall,
-            is_day: current.is_day,
         };
 
         return new Response(JSON.stringify({ currentWeather, temperature_2m, time, wind, humidity, uvindex}), {

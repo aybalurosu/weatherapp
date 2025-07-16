@@ -5,9 +5,7 @@ import Menu from "./components/Menu";
 
 import { useState, useRef, useEffect } from "react";
 import MainInfo from "./components/MainInfo";
-import Footer from "./components/Footer";
 import Search from "./components/Modals/ModalChilds/Search";
-import PopoverSettings from "./components/Popover/PopoverSettings";
 import CityWeather from "./components/Modals/ModalChilds/CityWeather";
 import { CityContext } from "./components/Modals/ModalChilds/CityContext";
 import { MenuProvider } from "./components/MenuContext";
@@ -83,10 +81,6 @@ export default function Home() {
             </CityContext.Provider>
           </div>
         </main>
-        <footer>
-          <Footer openPopover={handleOpenPopover}></Footer>
-          <PopoverSettings anchorEl={anchorEl} onClose={handleClosePopover} />
-        </footer>
       </MenuProvider>
     </div>
   );
