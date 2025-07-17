@@ -27,8 +27,6 @@ export async function POST (request) {
             precipitationProbability: precipitationProbabilityMax,
         }
 
-        console.log(forecastDetails)
-
         return new Response(JSON.stringify({ forecastDetails }), {
             status: 200,
             headers: {

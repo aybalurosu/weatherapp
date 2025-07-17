@@ -53,17 +53,19 @@ export default function Forecast() {
               <h2>Min: {minTemperature?.[i]}º</h2>
               <Image
                 src={
-                  Number(precipitationProbability?.[i]) >= 65
+                  Number(precipitationProbability?.[i]) >= 80
                     ? "/icons/rain-super.png"
-                    : Number(precipitationProbability?.[i]) > 30
+                    : Number(precipitationProbability?.[i]) > 50
                       ? "/icons/rain-medium.png"
+                    : Number(precipitationProbability?.[i]) > 20
+                      ? "/icons/rain-light.png"
                       : "/icons/sun.png"
                 }
                 width={30}
                 height={30}
                 alt=""
               />
-              {Number(precipitationProbability?.[i]) > 30 && (
+              {Number(precipitationProbability?.[i]) > 20 && (
                 <h1>{precipitationProbability?.[i]}%</h1>
               )}
             </div>

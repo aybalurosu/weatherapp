@@ -36,14 +36,8 @@ export default function Home() {
       if (isOpen) {
         // Remove the animation class to reset
         divRef.current.classList.remove('anim-slide-content');
-
-        // Trigger a reflow — forcing the browser to notice the class was removed
         void divRef.current.offsetWidth;
-
-        // Add the animation class again to replay animation
         divRef.current.classList.add('anim-slide-content');
-
-        // Also remove the "remove" class if you have it
         divRef.current.classList.remove('remove-anim-slide-content');
       } else {
         divRef.current.classList.add('remove-anim-slide-content');
@@ -51,16 +45,6 @@ export default function Home() {
       }
     }
   }, [isOpen]);
-
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleOpenPopover = (element) => {
-    setAnchorEl(element);
-  };
-
-  const handleClosePopover = () => {
-    setAnchorEl(null);
-  };
 
   const [typedCity, setTypedCity] = useState(null);
 
