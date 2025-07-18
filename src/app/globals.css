@@ -7,13 +7,13 @@
 }
 
 .anim-slide-content {
-  transform: translateX(310px);
-  transition: transform 0.25s linear;
+  transform: translateX(250px);
+  transition: transform 0.25s ease-out;
 }
 
 .remove-anim-slide-content {
   transform: translateX(0px);
-  transition: transform 0.25s linear;
+  transition: transform 0.25s ease-out;
 }
 
 .scroll-hidden::-webkit-scrollbar {
@@ -23,4 +23,65 @@
 .scroll-hidden {
   -ms-overflow-style: none;  /* IE y Edge */
   scrollbar-width: none;     /* Firefox */
+}
+
+/* weather items */
+/* sunny */
+.sunny-w {
+  background-color: #244779d8;
+}
+/* cloudy */
+.cloudy-w {
+  background-color: #3b5779e1;
+}
+/* wind */
+.wind-w {
+  background-color: #323538e1;
+}
+/* rain */
+.rain-w {
+  background-color: #44494ed8;
+}
+/* shower */
+.shower-w {
+  background-color: #343d46d8;
+}
+/* storm */
+.storm-w {
+  background-color: #353044e3;
+}
+/* snow */
+.snow-w {
+  background-color: #62646edc;
+}
+
+
+/* menu */
+/* sunny */
+.sunny {
+  background-color: rgb(46, 86, 143)
+}
+/* cloudy */
+.cloudy {
+  background-color: #3e5d81;
+}
+/* wind */
+.wind {
+  background-color: #2d3033;
+}
+/* rain */
+.rain {
+  background-color: #44484d;
+}
+/* shower */
+.shower {
+  background-color: #29323b;
+}
+/* storm */
+.storm {
+  background-color: #2f2b3a;
+}
+/* snow */
+.snow {
+  background-color: #747683;
 }

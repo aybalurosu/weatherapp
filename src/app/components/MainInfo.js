@@ -12,21 +12,19 @@ const MainInfo = React.forwardRef((props, ref) => {
   const { currentWeatherCity } = React.useContext(MenuContext);
   return (
     <div ref={ref}>
-      <div className="city-wheater flex flex-col items-center p-7">
+      <div className="flex flex-col items-center p-7">
         <h2 className="text-2xl text-white font-light">{currentWeatherCity?.name}</h2>
         <h1 className="text-7xl text-white font-light">{currentWeatherCity?.temperature}º</h1>
         <p className="text-xl text-white font-light">Máx. {currentWeatherCity?.maxTemp}º Mín. {currentWeatherCity?.minTemp}º</p>
       </div>
       <div className="p-3 flex flex-col gap-4">
         <WheaterTime />
-        <div className="inline-flex gap-5">
-          <Forecast />
-          <div className="flex flex-col gap-3">
-            <UVIndex />
-            <Humidity />
-            <Wind />
+        <Forecast />
+        <div className="inline-flex gap-3">
+          <UVIndex />
+          <Humidity />
+          <Wind />
           </div>
-        </div>
       </div>
     </div>
   );

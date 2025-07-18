@@ -95,19 +95,19 @@ export default function CityWeather({ open, handleCloseCity, onClose}) {
 
     return (
         <div>
-            <ModalParent open={open} onClose={handleCloseCity}>
-                <Box className={`fixed top-24 left-1/2 z-50 transform -translate-x-1/2 
-                 weather p-6 rounded-xl shadow-xl min-w-[50%] max-w-52 transition-all duration-200 ease-in-out
-                 ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}
-                `}>
-                    <div className='flex flex-row justify-between items-center mb-5'>
+        <ModalParent open={open} onClose={handleCloseCity}>
+            <Box className={`fixed top-40 left-1/2 z-50 transform -translate-x-1/2
+            weather rounded-xl shadow-xl min-w-[70mm] transition-all duration-200 ease-in-out
+            ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}
+            `}>
+                    <div className='flex flex-row justify-between items-center p-3'>
                         <button onClick={handleAddCityAndWeather}><Image src={'/modals/add.svg'} width={20} height={20} alt=''></Image></button>
                         <button onClick={onClose}><Image src={'/menu/close.svg'} width={20} height={20} alt=''></Image></button>
                     </div>
                     <div className="city-wheater flex flex-col items-center justify-center p-7">
                         <h2 className="text-2xl text-white font-light">{typedCity?.name}</h2>
                         <h1 className="text-7xl text-white font-light">{Number(currentForecast?.currentTemperature).toFixed(0)}º</h1>
-                        <p className="text-xl text-white font-light">Máx. {Number(maxTemperature).toFixed(0)}º Mín. {Number(minTemperature).toFixed(0)}º</p>
+                        <p className="text-lg text-white font-light">Máx. {Number(maxTemperature).toFixed(0)}º Mín. {Number(minTemperature).toFixed(0)}º</p>
                     </div>
                 </Box>
             </ModalParent>

@@ -49,23 +49,23 @@ export default function Home() {
   const [typedCity, setTypedCity] = useState(null);
 
   return (
-    <div className="weather h-full">
-      <MenuProvider>
-        <header className="p-4"> 
-          <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
-          {isOpen && <Menu isOpen={() => setIsOpen(open => !open)} />}
-        </header>
-        <main>
-          <div className="p-4">
-            {/* open modal */}
-            <CityContext.Provider value={{ typedCity, setTypedCity }}>
-              <MainInfo ref={divRef}></MainInfo>
-              <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
-              <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
-            </CityContext.Provider>
-          </div>
-        </main>
-      </MenuProvider>
+    <div className="border-4 border-white rounded-4xl p-3 bg-black">
+        <div className="weather w-90 rounded-3xl h-200 scroll-hidden overflow-y-scroll">
+          <MenuProvider>
+            <div> 
+              <Navbar isOpen={isOpenMenu} handleOpen={handleOpen}></Navbar>
+              {isOpen && <Menu isOpen={() => setIsOpen(open => !open)} />}
+            </div>
+            <div>
+                {/* open modal */}
+                <CityContext.Provider value={{ typedCity, setTypedCity }}>
+                  <MainInfo ref={divRef}></MainInfo>
+                  <Search open={open} onClose={handleClose} handleOpenCity={handleOpenCity}></Search>
+                  <CityWeather open={openCity} onClose={handleCloseCity}></CityWeather>
+                </CityContext.Provider>
+            </div>
+          </MenuProvider>
+      </div>
     </div>
   );
 }

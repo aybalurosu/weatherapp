@@ -12,11 +12,11 @@ export default function Menu({ isOpen }) {
   }
 
   return (
-    <div className="border-2 border-[#5579A4] w-72 h-full bg-[#5579A4] absolute top-0 left-0 p-4 z-10 rounded-tr-4xl">
+    <div className="border-2 border-[#5578a400] w-60 bg-[#244779d8] absolute top-19 z-10 p-3 rounded-3xl min-h-[85%]">
         <button onClick={isOpen}>
           <Image src={'/menu/close.svg'} width={20} height={20} alt={''}></Image>
         </button>
-      <h1 className="font-semibold text-3xl mt-3 text-white">Added Cities</h1>
+      <h1 className="font-semibold text-2xl mt-3 text-white">Added Cities</h1>
       {savedCities.map((entry, index) => (
           <div key={index} onClick={() => setCurrentWeatherCity(entry)} className="rounded-2xl border-1 border-[#2a548788] w-full mt-4 weather cursor-pointer inline-flex justify-between items-start p-3">
             <div className="flex flex-col gap-3">

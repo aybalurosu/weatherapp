@@ -41,7 +41,7 @@ export default function WheaterTime() {
   }, [latitude, longitude]);
 
   return (
-    <div className="border-1 border-[#10386900] w-full p-4 rounded-2xl bg-[#10386953] h-28 scroll-hidden overflow-x-auto">
+    <div className="border-1 border-[#10386900] w-full p-4 rounded-2xl bg-[#244779d8] h-28 scroll-hidden overflow-x-scroll">
       <div className="inline-flex items-center justify-center gap-4">
         {hourlyTemperature?.time.map((hour, i) => (
           <div key={i} className="flex flex-col items-center justify-center text-white font-medium">

@@ -41,8 +41,8 @@ export default function Search({ open, handleClose, onClose, handleOpenCity }) {
     return (
         <div>
             <ModalParent open={open} onClose={handleClose}>
-                <Box className={`fixed top-24 left-1/2 z-50 transform -translate-x-1/2 
-                bg-white rounded-xl shadow-xl min-w-[87%] max-w-full transition-all duration-200 ease-in-out
+                <Box className={`fixed top-40 left-1/2 z-10 transform -translate-x-1/2 
+                bg-white rounded-xl shadow-xl min-w-[40px] transition-all duration-200 ease-in-out
                 ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}
                 `}>
                     <div className='p-6 pb-3'>
@@ -56,9 +56,9 @@ export default function Search({ open, handleClose, onClose, handleOpenCity }) {
                                 placeholder="Search..." value={city} onChange={(e) => setCity(e.target.value)} />
                         </div>
                     </div>
-                    <div className='flex flex-col gap-6.5'>
+                    <div className='flex flex-col gap-6.5 h-96'>
                         <h1 className='font-medium text-xl pl-6 pt-0'>Search History</h1>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col scroll-hidden overflow-y-scroll'>
                             {results.map((r, i) => (
                                 <div key={i} className="inline-flex justify-between text-bs hover:bg-[#c7d6e894] pl-6 pr-6 transition-all rounded-xl">
                                     <button onClick={() => {handleCitySelect(r)}} className="pb-4 flex flex-col items-start cursor-pointer">
